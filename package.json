@@ -1,0 +1,24 @@
+{
+  "name": "webapp-express",
+  "version": "1.0.0",
+  "description": "Setup Web App Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "watch": "node --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "movies",
+    "coding",
+    "webapp",
+    "express",
+    "node"
+  ],
+  "author": "Giuseppe Rizza",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mysql2": "^3.13.0"
+  }
+}
