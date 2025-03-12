@@ -6,7 +6,16 @@ function index(req, res) {
 
     connection.query(sql, (err, results) => {
         if (err) return res.status(500).json({ error: 'DB KO' });
-        res.json(results);
+
+        const movies = results.map(movie => {
+
+            return {
+                ...movie,
+                image: req.imagePath + movie.image
+            }
+
+        })
+        res.json(movies);
     });
 };
 
@@ -27,6 +36,8 @@ function show(req, res) {
         if (movieResults.length === 0) return res.status(404).json({ error: 'Movie not available' });
 
         const movie = movieResults[0];
+
+        movie.image = req.imagePath + movie.image;
 
         connection.query(reviewsSql, [id], (err, reviewsResults) => {
             if (err) return res.status(500).json({ error: 'DB KO' });
