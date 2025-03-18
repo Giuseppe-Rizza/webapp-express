@@ -50,6 +50,29 @@ function show(req, res) {
 
 };
 
+function store(req, res, next) {
+
+    const { title, director, genre, release_year, abstract } = req.body;
+
+    const imageName = `${req.file.filename}`;
+
+    const query = "INSERT INTO movies (title, director, genre, release_year, image, abstract) VALUES (?, ?, ?, ?, ?, ?)";
+
+    connection.query(query,
+        [title, director, genre, release_year, imageName, abstract],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+                return next(new Error("DB KO"));
+            }
+
+            res.status(201).json({
+                status: "success",
+                message: "New movie added",
+            });
+        })
+}
+
 function storeReview(req, res) {
 
     const { id } = req.params;
@@ -67,4 +90,4 @@ function storeReview(req, res) {
 
 };
 
-module.exports = { index, show, storeReview };
+module.exports = { index, show, store, storeReview };
